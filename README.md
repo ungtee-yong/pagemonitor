@@ -10,14 +10,12 @@
 - ระบบ Toast แจ้งผลสำเร็จ/ผิดพลาด และ Error Banner พร้อมปุ่มรีลอง
 
 ## โครงสร้างโปรเจ็กต์
-```
-/client   # React + Vite frontend
-/server   # Express backend proxy ไปยัง Facebook Graph API
-```
+- `server/src`      – โค้ด Express + helper เชื่อม Facebook Graph
+- `server/public`   – ไฟล์ HTML/CSS/JS ที่เสิร์ฟโดยตรงจาก Node.js
 
 ## การเตรียมสภาพแวดล้อม
 1. ต้องมี Node.js 18+ และ npm
-2. สร้างไฟล์ env สำหรับฝั่งเซิร์ฟเวอร์
+2. สร้างไฟล์ environment
    ```bash
    cp server/.env.example server/.env
    ```
@@ -27,27 +25,19 @@
    - `pages_manage_posts`
 
 ## คำสั่งสำคัญ
-ติดตั้ง dependency ของทั้ง frontend และ backend
+ติดตั้ง dependency (ฝั่ง client เสิร์ฟด้วย Node.js แล้ว ไม่ต้อง build แยก)
 ```bash
 npm install
 ```
 
-รันโหมดพัฒนา (client + server พร้อมกันด้วย proxy)
+โหมดพัฒนา (nodemon reload อัตโนมัติ)
 ```bash
 npm run dev
-# frontend: http://localhost:5173
-# backend:  http://localhost:4000
+# เปิดเบราว์เซอร์ไปที่ http://localhost:4000
 ```
 
-รันเฉพาะฝั่งใดฝั่งหนึ่ง
+โหมด production
 ```bash
-npm run dev:server   # nodemon backend
-npm run dev:client   # Vite frontend
-```
-
-สร้างไฟล์ build ของ frontend และเสิร์ฟผ่าน Express
-```bash
-npm run build
 npm start
 ```
 
@@ -60,5 +50,5 @@ npm start
 
 ## ข้อควรทราบ
 - โปรดอย่าเผยแพร่ Page/User access token ในฝั่ง client
-- หากต้องการ deploy ให้ build frontend (`npm run build`) แล้วรัน `npm start` เพื่อให้ Express เสิร์ฟไฟล์ `/client/dist`
+- เมื่อต้องการ deploy ให้เตรียม `.env` บนเครื่องปลายทางแล้วรัน `npm start` เพื่อให้ Express เสิร์ฟไฟล์ใน `server/public`
 - โค้ดทั้งหมดใช้ ASCII ตามมาตรฐานและมีคอมเมนต์เฉพาะส่วนที่จำเป็น

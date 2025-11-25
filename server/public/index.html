@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PageMonitor | Facebook Comment Reply Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <div>
+          <p class="eyebrow">Facebook Page Reply Center</p>
+          <h1>ตอบทุกคอมเมนต์ได้จากหน้าเดียว</h1>
+          <p>
+            ดูว่าแฟนเพจคอมเมนต์โพสต์ไหน เวลาใด พร้อมตอบกลับได้ทันทีโดยไม่ต้องเข้า Facebook
+          </p>
+        </div>
+        <div class="token-hint">
+          <p>ต้องมีสิทธิ์ pages_show_list, pages_read_engagement และ pages_manage_posts</p>
+          <p class="muted">กรอกโทเคนใน server/.env แล้วรีสตาร์ตเซิร์ฟเวอร์</p>
+        </div>
+      </header>
+
+      <div id="error-banner" class="error-banner hidden">
+        <span id="error-message"></span>
+        <button id="error-retry" class="ghost-button" type="button">ลองอีกครั้ง</button>
+      </div>
+
+      <main class="layout">
+        <aside class="sidebar">
+          <div class="sidebar__header">
+            <div>
+              <p class="eyebrow">Fan Page</p>
+              <h2>จัดการคอมเมนต์</h2>
+            </div>
+            <button id="pages-refresh" class="ghost-button" type="button">รีเฟรช</button>
+          </div>
+          <div class="sidebar__body" id="pages-container">
+            <div class="empty-state">กำลังโหลดข้อมูลเพจ...</div>
+          </div>
+        </aside>
+
+        <section class="panel">
+          <div class="panel__header">
+            <div>
+              <p class="eyebrow">โพสต์บนเพจ</p>
+              <h3 id="posts-title">เลือกเพจก่อน</h3>
+            </div>
+            <button id="posts-refresh" class="ghost-button" type="button" disabled>รีเฟรชโพสต์</button>
+          </div>
+          <div id="posts-body" class="panel__body">
+            <div class="empty-state">เลือกเพจก่อนเพื่อดูโพสต์ล่าสุด</div>
+          </div>
+        </section>
+
+        <section class="panel thread">
+          <div class="panel__header">
+            <div>
+              <p class="eyebrow">คอมเมนต์ล่าสุด</p>
+              <h3 id="comments-title">เลือกโพสต์เพื่อดูคอมเมนต์</h3>
+            </div>
+            <button id="comments-refresh" class="ghost-button" type="button" disabled>
+              รีเฟรชคอมเมนต์
+            </button>
+          </div>
+          <div id="comments-body" class="thread__content">
+            <div class="empty-state">เลือกโพสต์จากตรงกลางเพื่อดูคอมเมนต์</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden" role="status">
+      <span id="toast-message"></span>
+      <button id="toast-close" class="ghost-button" type="button">ปิด</button>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
