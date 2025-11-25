@@ -77,8 +77,8 @@ app.post('/api/comments/:commentId/replies', async (req, res) => {
 const publicDir = path.resolve(__dirname, '../public');
 if (fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) {
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api') || req.method !== 'GET') {
       return next();
     }
     res.sendFile(path.join(publicDir, 'index.html'));
