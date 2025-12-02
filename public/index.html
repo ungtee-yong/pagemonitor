@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Comment Manager</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Facebook Comment Manager
+                </h1>
+                <div id="page-info" class="page-info"></div>
+            </div>
+            <button id="refresh-btn" class="refresh-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                </svg>
+                รีเฟรช
+            </button>
+        </header>
+
+        <div id="status-message" class="status-message"></div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="total-posts">0</div>
+                <div class="stat-label">โพสต์ทั้งหมด</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-comments">0</div>
+                <div class="stat-label">คอมเมนต์ทั้งหมด</div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>กำลังโหลดข้อมูล...</p>
+        </div>
+
+        <div id="posts-container" class="posts-container"></div>
+    </div>
+
+    <!-- Modal for replying to comments -->
+    <div id="reply-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ตอบกลับคอมเมนต์</h3>
+                <button class="close-btn" onclick="closeReplyModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="reply-comment-content" class="reply-comment-content"></div>
+                <textarea id="reply-message" class="reply-textarea" placeholder="พิมพ์ข้อความตอบกลับ..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeReplyModal()">ยกเลิก</button>
+                <button class="btn btn-primary" onclick="sendReply()">ส่งคำตอบ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
